@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feature selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script>
+    $(document).bind('mobileinit',function(){
+        $.mobile.changePage.defaults.changeHash = false;
+        $.mobile.hashListeningEnabled = false;
+        $.mobile.pushStateEnabled = false;
+    });
+</script>
+<script>
+	$( document ).on( "click", ".show-page-loading-msg", function() {
+    var $this = $( this ),
+        theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+        msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
+        textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
+        textonly = !!$this.jqmData( "textonly" );
+        html = $this.jqmData( "html" ) || "";
+    $.mobile.loading( "show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+    });
+})
+.on( "click", ".hide-page-loading-msg", function() {
+    $.mobile.loading( "hide" );
+});
+</script>
+</head>
+<body>
+<div data-role="page">
+	<div data-role="panel" id="firstpanel">
+        This first general exam of Mobile Device Programming have these following content &rarr;
+    </div>
+	<div data-role="header" data-position="fixed" data-theme="b">
+    	<h1>Feature Selection</h1>
+  	</div>
+  	<div data-role="content">
+        <div data-role="listview">
+    		<form action="#">
+        		<table>
+        		<tr>
+            		<td>
+                		<select name="category" id="category">
+                    		<option value="converter">Converter</option>
+                    		<option value="colorseeker">Color Seeker</option>
+                    		<option value="chapterreview">Chapter Review</option>
+                		</select>
+            		</td>
+            		<td>
+               			<div id="div-ok">
+                    		<button class="show-page-loading-msg" data-textonly="false" data-textvisible="false" data-msgtext="" data-inline="true" type="submit" id="goTo">OK</button>
+                		</div>
+            		</td>
+            		<td>
+            			<a href="#firstpanel" data-role="button">What is this page?</a>
+            		</td>
+        		</tr>
+        		</table>
+    		</form>
+    	</div>
+	</div>
+<script> document.getElementById('goTo').onclick = function(e) { 
+e.preventDefault(); 
+var yourPath = '/';
+var yourPage = document.getElementById('category').value,
+        extension = '.html'; 
+var pathToFolder = 'https://github.com/yoshidakomugi/MobDev--PPM-/raw/master/'; 
+window.location = pathToFolder + yourPath + yourPage + extension ; } 
+</script>
+</body>
+</html>
